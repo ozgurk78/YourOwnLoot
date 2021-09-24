@@ -1,4 +1,4 @@
-import { AppBar, Box, Container, Paper, Toolbar, Typography, TextField, Button, Divider, Tabs, Tab } from "@mui/material"
+import { AppBar, Box, Container, Paper, Toolbar, Typography, TextField, Button, Tabs, Tab } from "@mui/material"
 import { useEffect, useState } from "react"
 import CustomThemeProvider from "./components/CustomThemeProvider"
 import Web3 from 'web3'
@@ -98,7 +98,6 @@ const App = () => {
             setChainId(chainId)
           }
 
-          fetchTokenUri(0)
 
         } catch (error) {
           console.log(error)
@@ -112,7 +111,7 @@ const App = () => {
     return () => {
 
     }
-  }, [])
+  }, [web3.eth])
 
   if (!window.ethereum) {
     return <Typography>Install Metamask</Typography>
@@ -296,7 +295,7 @@ const App = () => {
 
               {
                 tokenUri &&
-                <img src={tokenUri} style={{ height: "auto", width: "100%" }} />
+                <img alt="" src={tokenUri} style={{ height: "auto", width: "100%" }} />
               }
 
             </Box>
