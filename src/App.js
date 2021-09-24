@@ -86,6 +86,11 @@ const App = () => {
 
     if (window.ethereum) {
 
+      window.ethereum.on('chainChanged', function(networkId){
+        console.log('networkChanged',networkId);
+        window.location.reload()
+      });
+
       (async () => {
         try {
           let acc = await requestAccounts()
@@ -114,11 +119,41 @@ const App = () => {
   }, [web3.eth])
 
   if (!window.ethereum) {
-    return <Typography>Install Metamask</Typography>
+    return <CustomThemeProvider>
+      <Box
+        component={Paper}
+        elevation={0}
+        sx={{
+          minHeight: "100vh",
+          borderRadius: 0,
+          display: "flex",
+          alignItems:"center",
+          justifyContent: "center",
+          textAlign: "center"
+        }}
+      >
+        <Typography>Install Metamask</Typography>
+      </Box>
+    </CustomThemeProvider>
   }
 
   if (chainId !== 43114) {
-    return <Typography>Plase Change your network to Avalanche Mainnet C-Chain</Typography>
+    return <CustomThemeProvider>
+      <Box
+        component={Paper}
+        elevation={0}
+        sx={{
+          minHeight: "100vh",
+          borderRadius: 0,
+          display: "flex",
+          alignItems:"center",
+          justifyContent: "center",
+          textAlign: "center"
+        }}
+      >
+        <Typography>Plase Change your network to Avalanche Mainnet C-Chain</Typography>
+      </Box>
+    </CustomThemeProvider>
   }
 
 
