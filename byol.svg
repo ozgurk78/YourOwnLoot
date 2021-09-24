@@ -1,0 +1,5 @@
+<svg version="1.2" baseProfile="tiny-ps" xmlns="http://www.w3.org/2000/svg" width="768" height="768">
+<style>tspan{white-space:pre;font-size:35px;fill:#f1f1f1;}</style>
+<rect width="100%" height="100%" fill="black" /><text>
+<tspan x="50" y="100">s1</tspan><tspan x="50" y="150">s2</tspan><tspan x="50" y="200">s3</tspan>
+<tspan x="50" y="250">s4</tspan><tspan x="50" y="300">s5</tspan><tspan x="500" y="700">#1</tspan></text></svg>
