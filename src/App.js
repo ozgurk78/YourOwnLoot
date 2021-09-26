@@ -33,21 +33,10 @@ const App = () => {
   const [value, setValue] = useState(0)
 
   const web3 = new Web3(window.ethereum)
-  const YOL_CONTRACT_ADDRESS = "0x11729D9EeC7186Ec6F4944ab72ef8EF65FF565ed"
-
+  const YOL_CONTRACT_ADDRESS = "0xFF9C1b15B16263C61d017ee9F65C50e4AE0113D7"
   const [chainId, setChainId] = useState(null)
-
   const [account, setAccount] = useState(null)
-
-
-  const [spec1, setSpec1] = useState("...")
-  const [spec2, setSpec2] = useState("...")
-  const [spec3, setSpec3] = useState("...")
-  const [spec4, setSpec4] = useState("...")
-  const [spec5, setSpec5] = useState("...")
   const [tokenId, setTokenId] = useState(0)
-
-
   const [tokenUri, setTokenUri] = useState("")
 
   const fetchTokenUri = async () => {
@@ -65,16 +54,7 @@ const App = () => {
   }
 
 
-  const handleMintYourOwnLoot = async () => {
-    try {
-      const yol_contract = new web3.eth.Contract(YOL_CONTRACT_ABI, YOL_CONTRACT_ADDRESS)
-      console.log(yol_contract.methods)
-      await yol_contract.methods.mint(tokenId, spec1, spec2, spec3, spec4, spec5).send({ from: account })
-    } catch (error) {
-      console.log(error)
-      alert("error")
-    }
-  }
+  
 
   const requestAccounts = async () => {
     let res = await window.ethereum.send('eth_requestAccounts');
@@ -137,7 +117,7 @@ const App = () => {
     </CustomThemeProvider>
   }
 
-  if (chainId !== 43114) {
+  if (chainId !== 1) {
     return <CustomThemeProvider>
       <Box
         component={Paper}
@@ -151,7 +131,7 @@ const App = () => {
           textAlign: "center"
         }}
       >
-        <Typography>Plase Change your network to Avalanche Mainnet C-Chain</Typography>
+        <Typography>Plase Change your network to Ethereum Mainnet </Typography>
       </Box>
     </CustomThemeProvider>
   }
@@ -170,7 +150,7 @@ const App = () => {
 
 
   const handleSupport = async () => {
-    await web3.eth.sendTransaction({ from: account, to: "0x575CBC1D88c266B18f1BB221C1a1a79A55A3d3BE", value: web3.utils.toWei("1", "ether") })
+    await web3.eth.sendTransaction({ from: account, to: "0x70F2f85DD64CcD5257D16A5797216cFb1d17A423", value: web3.utils.toWei("1", "ether") })
   }
 
 
@@ -198,36 +178,52 @@ const App = () => {
               },
             }}
           >
+            
             <Box>
+           
               <a href="/#">
-                <Typography variant="h5">Your Own Loot</Typography>
+                <Typography variant="h5">NFT ID Viewer</Typography>
               </a>
+             
             </Box>
+            
+           
+
             <Box sx={{
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between"
             }}>
 
-              <a target="_blank" rel="noreferrer" href="https://github.com/c-8-r/YourOwnLoot">
+              <a target="_blank" rel="noreferrer" href="https://twitter.com/ozgur_klncl">
+                <Typography variant="body1" sx={{ marginLeft: "10px" }}>Twitter</Typography>
+              </a>
+
+              <a target="_blank" rel="noreferrer" href="https://github.com/ozgurk78">
                 <Typography variant="body1" sx={{ marginLeft: "10px" }}>Github</Typography>
               </a>
 
-              <a target="_blank" rel="noreferrer" href="https://avascan.info/blockchain/c/address/0x11729D9EeC7186Ec6F4944ab72ef8EF65FF565ed">
+              <a target="_blank" rel="noreferrer" href="https://etherscan.io/address/0xff9c1b15b16263c61d017ee9f65c50e4ae0113d7">
                 <Typography variant="body1" sx={{ marginLeft: "10px" }}>Contract</Typography>
               </a>
+
             </Box>
           </Toolbar>
-          <Box sx={{ borderBottom: 1, borderColor: 'divider' }} component={Container} >
+          
+          <Box sx={{ borderBottom: 1, borderColor: 'Blue' }} component={Container} >
             <Tabs value={value} onChange={handleChange} >
-              <Tab label="Mint" {...a11yProps(0)} />
+             
               <Tab label="View" {...a11yProps(1)} />
+              <Tab label="Support" {...a11yProps(0)} />
+              
             </Tabs>
           </Box>
         </AppBar>
 
 
-        <TabPanel value={value} index={0}>
+
+
+        <TabPanel value={value} index={1}>
           <Container
             sx={{
               display: "flex",
@@ -241,15 +237,7 @@ const App = () => {
               width: "100%"
             }}
           >
-
-            <Box sx={{ width: { xs: "100%", md: "45%" } }}>
-
-              <svg version="1.2" baseProfile="tiny-ps" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 384">
-                <rect width="100%" height="100%" fill="black" /><text>
-                  <tspan x="25" y="50">{spec1}</tspan><tspan x="25" y="75">{spec2}</tspan><tspan x="25" y="100">{spec3}</tspan>
-                  <tspan x="25" y="125">{spec4}</tspan><tspan x="25" y="150">{spec5}</tspan><tspan x="250" y="350">#{tokenId}</tspan></text></svg>
-
-            </Box>
+            
             <Box sx={{
               width: { xs: "100%", md: "45%" },
               display: "flex",
@@ -257,61 +245,17 @@ const App = () => {
               justifyContent: "center"
             }}>
 
-              <TextField
-                variant="outlined"
-                label="Spec 1"
-                sx={{ width: "100%", marginBottom: "10px" }}
-                value={spec1}
-                onChange={(e) => setSpec1(e.target.value)}
-              />
-              <TextField
-                variant="outlined"
-                label="Spec 2"
-                sx={{ width: "100%", marginBottom: "10px" }}
-                value={spec2}
-                onChange={(e) => setSpec2(e.target.value)}
-              />
-              <TextField
-                variant="outlined"
-                label="Spec 3"
-                sx={{ width: "100%", marginBottom: "10px" }}
-                value={spec3}
-                onChange={(e) => setSpec3(e.target.value)}
-              />
-              <TextField
-                variant="outlined"
-                label="Spec 4"
-                sx={{ width: "100%", marginBottom: "10px" }}
-                value={spec4}
-                onChange={(e) => setSpec4(e.target.value)}
-              />
-              <TextField
-                variant="outlined"
-                label="Spec 5"
-                sx={{ width: "100%", marginBottom: "10px" }}
-                value={spec5}
-                onChange={(e) => setSpec5(e.target.value)}
-              />
-
-              <TextField
-                variant="outlined"
-                label="Token Id (min:0, max:10000)"
-                sx={{ width: "100%", marginBottom: "10px" }}
-                value={tokenId}
-                type="number"
-                onChange={(e) => setTokenId(e.target.valueAsNumber)}
-              />
-
-              <Button
-                variant="contained"
-                sx={{ width: "50%", marginTop: "10px" }}
-                onClick={handleMintYourOwnLoot}
-              >Mint</Button>
+             
+                          
             </Box>
 
           </Container>
         </TabPanel>
-        <TabPanel value={value} index={1}>
+
+
+
+
+        <TabPanel value={value} index={0}>
           <Container
             sx={{
               display: "flex",
@@ -344,7 +288,7 @@ const App = () => {
 
               <TextField
                 variant="outlined"
-                label="Token Id (min:0, max:10000)"
+                label="Token Id (min:0, max:?)"
                 sx={{ width: "100%", marginBottom: "10px" }}
                 value={tokenId}
                 type="number"
@@ -352,29 +296,40 @@ const App = () => {
               />
 
               <Button
+              
                 variant="contained"
-                sx={{ width: "50%", marginTop: "10px" }}
+                sx={{   width: "50%", marginTop: "10px" }}
                 onClick={fetchTokenUri}
               >View</Button>
+
             </Box>
+
+          
+
 
           </Container>
         </TabPanel>
 
+
+
         <Box
           sx={{
+           
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             marginTop: "150px"
           }}
         >
-          <Typography>Created by c8r.eth</Typography>
+          <Typography>Support</Typography>
           <Button
             onClick={handleSupport}
-            sx={{ marginLeft: "10px" }} variant="outlined">Support 1 AVAX</Button>
+            sx={{ marginLeft: "10px" }} variant="outlined">Support 1 ETH</Button>
 
         </Box>
+
+
+
 
       </Box>
     </CustomThemeProvider >

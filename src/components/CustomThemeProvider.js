@@ -8,7 +8,7 @@ const CustomThemeProvider = ({ children }) => {
     const theme = createTheme({
         palette: {
 
-            primary: colors.deepOrange,
+            primary: colors.blue,
             background: {
                 paper: "#151515"
             },
